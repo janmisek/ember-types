@@ -5,24 +5,20 @@ import extractName from './../../classes/extract-name';
 import {stringifyItems} from './../../-tools';
 const {isArray} = Ember;
 
-export default defineValidator(
-  (...items) => {
-
-    if (!isArray(items)) {
-      throw new DefinitionError('items must be array');
-    }
-
-    const enumerationValidator = (value) => {
-      if (items.indexOf(value) === -1) {
-        throw new InvalidTypeError(`${extractName(value)} is not included in possible enumerated of ${stringifyItems(items)}`);
+export default defineValidator({
+    init(...items) {
+      if (!isArray(items)) {
+        throw new DefinitionError('items must be array');
       }
-    };
-
-    enumerationValidator.validatorName = `enumerationValidator (${stringifyItems(items)})`;
-
-    return enumerationValidator;
-
+      this.items = items;
+      this.validatorName = `enumeration (${stringifyItems(items)})`;
+    },
+    validate(value) {
+      if (this.items.indexOf(value) === -1) {
+        throw new InvalidTypeError(`${extractName(value)} is not included in possible enumerated of ${stringifyItems(this.items)}`);
+      }
+    }
   },
-  {register: false}
+  {name: 'enumeration'}
 );
 

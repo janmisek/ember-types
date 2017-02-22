@@ -1,21 +1,16 @@
-import { defineValidator} from './../definition';
+import {defineValidator} from './../definition';
 import {InvalidTypeError} from './../errors';
 import extractName from './../../classes/extract-name';
 
-export default  defineValidator(
-  (Klazz) => {
-
-    const instanceValidator = (value) => {
-      if (!(value instanceof Klazz)) {
-        throw new InvalidTypeError(`${extractName(value)} must be instance of ${extractName(Klazz)}`);
+export default  defineValidator({
+    init(Klazz) {
+      this.Klazz = Klazz;
+    },
+    validate(value) {
+      if (!(value instanceof this.Klazz)) {
+        throw new InvalidTypeError(`${extractName(value)} must be instance of ${extractName(this.Klazz)}`);
       }
-    };
-    
-    instanceValidator.validatorName = 'instanceValidator';
-    
-    return instanceValidator;
-    
+    }
   },
   {register: 'instance'}
-); 
-  
+);

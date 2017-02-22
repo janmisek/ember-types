@@ -1,7 +1,7 @@
 import {module, test} from 'ember-qunit';
 import {defineConstants} from 'ember-types/constants';
 
-module('Constants', {
+module('constants | define-constants', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

@@ -4,20 +4,18 @@ import {InvalidTypeError} from './../errors';
 import {stringifyItems} from './../../-tools';
 import extractName from './../../classes/extract-name';
 
-const stringifyValidators = (validators) => {
-  return stringifyItems(validators.map(v => getValidatorName(v)));
-};
-
-export default defineValidator(
-  (validators) => {
-
-    validators = resolveValidators(validators);
-
-    const logicalOr = (value) => {
-
-      const found = validators.some((validator) => {
+export default defineValidator({
+    init(validators) {
+      this.validators = resolveValidators(validators);
+      this.validatorName = `or (${this.stringifyValidators()})`;
+    },
+    stringifyValidators() {
+      return stringifyItems(this.validators.map(v => getValidatorName(v)));
+    },
+    validate(value) {
+      const found = this.validators.some((validator) => {
         try {
-          validator(value);
+          validator.validate(value);
           return true;
         } catch (e) {
           if (!(e instanceof InvalidTypeError)) {
@@ -27,14 +25,10 @@ export default defineValidator(
       });
 
       if (!found) {
-        throw new InvalidTypeError(`${extractName(value)} must be one of type [ ${stringifyValidators(validators)}  ]`)
+        throw new InvalidTypeError(`${extractName(value)} must be one of type [ ${this.stringifyValidators()}  ]`)
       }
-    };
+    }
 
-    logicalOr.validatorName = `Or (${stringifyValidators(validators)})`;
-
-    return logicalOr;
   },
   {register: 'or'}
-);
-
+)

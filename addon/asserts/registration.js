@@ -15,26 +15,33 @@ export const resolveValidators = (validators) => {
 
 export const resolveValidator = (validator) => {
 
+  if (typeof validator === 'object' && validator && validator.isValidatorInstance) {
+    return validator;
+  }
+
   if (typeof validator === 'string') {
     const shortcut = validator;
-    validator = registrations[validator];
+    validator = new (registrations[validator])(shortcut);
     if (!validator) {
       throw new DefinitionError(`Validator for shortcut '${shortcut}' not found`);
     }
-    return validator();
+    return validator;
   }
 
   if (typeof validator === 'function') {
-    if (validator.isValidator) {
+    if (validator.isValidatorClass) {
       return validator
     } else {
-      return registrations['instance'](validator);
+      const cls = validator;
+      const InstanceValidator = registrations['instance'];
+      return new InstanceValidator(cls);
     }
-
   }
 
   if (isArray(validator)) {
-    return registrations['or'](validator);
+    const validators = validator;
+    const OrValidator = registrations['or'];
+    return new OrValidator(validators);
   }
 
   throw new DefinitionError(`Invalid validator defined ${extractName(validator)}`);

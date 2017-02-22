@@ -2,7 +2,7 @@ import Ember from 'ember';
 import {module, test} from 'ember-qunit';
 import {namedClass, extractName} from 'ember-types/classes';
 
-module('Classes', {
+module('classes | named-class', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
@@ -11,10 +11,10 @@ test('named class and extract name / classes / instances', function (assert) {
 
   const Klazz = Ember.Object.extend();
   namedClass(Klazz, 'This.Is.My.Klazz');
-  assert.equal(extractName(Klazz), "Class 'This.Is.My.Klazz'");
+  assert.equal(extractName(Klazz), "Class This.Is.My.Klazz");
 
   const instance = Klazz.create();
-  assert.equal(extractName(instance), "Instance of 'This.Is.My.Klazz'");
+  assert.equal(extractName(instance), "Instance of This.Is.My.Klazz");
 
 });
 

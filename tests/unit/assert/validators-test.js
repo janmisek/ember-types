@@ -1,11 +1,11 @@
 import Ember from 'ember';
 import {module, test} from 'ember-qunit';
 import {assertType, defineValidator} from 'ember-types/asserts';
-import enumerationValidator from 'ember-types/asserts/validator/enumeration';
+import EnumerationValidator from 'ember-types/asserts/validator/enumeration';
 import { AssertTypeError } from 'ember-types/asserts/errors';
 
 
-module('Validators', {
+module('assert | validator', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
@@ -46,11 +46,11 @@ test('Or works ', function (assert) {
     assertType([], ['string', 'number']);
   }, AssertTypeError);
 
-  const customValidator = defineValidator(() => (n) => n === 0);
+  const CustomValidator = defineValidator((n) => n === 0);
 
   assert.ok(assertType(1, ['string', 'number']));
   assert.ok(assertType('s', ['string', 'number']));
-  assert.ok(assertType(0, ['string', customValidator()]));
+  assert.ok(assertType(0, ['string', new CustomValidator()]));
 
 });
 
@@ -72,10 +72,10 @@ test('Enumeration works ', function (assert) {
 
 
   assert.throws(() => {
-    assertType('a', enumerationValidator('b','c'));
+    assertType('a', new EnumerationValidator('b','c'));
   }, AssertTypeError);
 
-  assert.ok(assertType('a', enumerationValidator('a','b')));
+  assert.ok(assertType('a', new EnumerationValidator('a','b')));
 
 });
 

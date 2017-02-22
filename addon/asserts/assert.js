@@ -31,7 +31,7 @@ export const assertType = (value, validator, options) => {
     };
 
     validator = resolveValidator(validator);
-    validator(value);
+    validator.validate(value);
 
   } catch (e) {
     if (e instanceof InvalidTypeError) {

@@ -5,11 +5,11 @@ const unknownFunction = 'UnknownFunction';
 const unknownObject = 'UnknownObject';
 
 export const extractClassName = (subject) => {
-  return subject[Ember.NAME_KEY] || subject.name || stringify(subject) || unknownFunction;
+  return subject[Ember.NAME_KEY] || subject.modelName || subject.name || stringify(subject) || unknownFunction;
 };
 
 export const exportInstanceName = (subject) => {
-  return subject._debugContainerKey || (subject.constructor ? extractClassName(subject.constructor) : false) || stringify(subject) || unknownObject;
+  return subject._debugContainerKey || subject.modelName || (subject.constructor ? extractClassName(subject.constructor) : false) || stringify(subject) || unknownObject;
 };
 
 export default function extractName(subject) {
@@ -39,8 +39,8 @@ export default function extractName(subject) {
   }
 
   if (typeof subject === 'function') {
-    return `Class '${extractClassName(subject)}'`;
+    return `Class ${extractClassName(subject)}`;
   } else {
-    return `Instance of '${exportInstanceName(subject)}'`;
+    return `Instance of ${exportInstanceName(subject)}`;
   }
 }
