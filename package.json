@@ -42,7 +42,9 @@
     "loader.js": "^4.0.10"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "type",
+    "assert"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.7"
