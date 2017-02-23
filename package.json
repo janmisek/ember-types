@@ -1,6 +1,6 @@
 {
   "name": "ember-types",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "WIP: Sometymes you need types and assertions when organizing bigger application. This ember addon provides extensions to assert typesfor computed properties and function parameters in runtime.",
   "directories": {
     "doc": "doc",
