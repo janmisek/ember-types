@@ -15,11 +15,11 @@ for computed properties and function parameters in runtime.
 
 ## Installation
 
-* `ember install ember-error-handler`
+`ember install ember-error-handler`
 
 ## Typed computed property
 
-```
+``` javascript
 import { assertableComputed } from 'ember-types/property';
 
 export default Ember.Object.extend({
@@ -28,10 +28,10 @@ export default Ember.Object.extend({
   }).assertable('string')
 });
 
-```
-## Assert type of function params
+``` 
+## Assert type of function arguments
 
-```
+``` javascript
 import { assertType } from 'ember-types/asserts';
 function execute(param) {
   assertType(param, 'string');
@@ -44,7 +44,7 @@ Assertions could be defined as string, Assertion Validator or Class name
 
 ### Assertion based on shortcuts
 
-```
+``` javascript
 import { assertType } from 'ember-types/asserts';
 assertType('hello world', 'string');
 ```
@@ -61,14 +61,14 @@ supported shortcuts
 
 ### Assertion based on class
 
-```
+``` javascript
 import { assertType } from 'ember-types/asserts';
 assertType(myInstance, Ember.Object);
 ```
 
 ### Assertion based on validator
 
-```
+``` javascript
 import { assertType } from 'ember-types/asserts';
 import LogicalOr from 'ember-types/asserts/validator/logical-or'
 import Enumeration from 'ember-types/asserts/validator/enumeration'
@@ -80,7 +80,7 @@ assertType(mixed, new LogicalOr(Ember.Component, Ember.Route, new Enumeration(fa
 
 ### Assertion based on enumeration
 
-```
+``` javascript
 import { assertType } from 'ember-types/asserts';
 
 // will fail
@@ -89,7 +89,7 @@ assertType('hello', enumeration('hello', 'world'));
 
 ### Custom validators could be implemented
 
-```
+``` javascript
 import { defineValidator } from 'ember-types/definition';
 import { InvalidTypeError } from 'ember-types/errors';
 import { extractName } from 'ember-types/classes';
@@ -103,7 +103,7 @@ export default  defineValidator(
   {name: 'boolean'}
 );
 
-```
+``` 
 
 See LogicalOr validator as advanced validator implementation
 
