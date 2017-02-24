@@ -3,6 +3,7 @@
 # virtual env
 /virtualenv
 /.idea
+ember-types.iml
 
 # compiled output
 /dist
