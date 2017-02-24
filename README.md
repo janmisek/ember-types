@@ -1,7 +1,6 @@
 # Ember-types
 
-Sometymes you need types and assertions when organizing bigger application. This Ember addon provides extensions to assert types 
-for computed properties and function parameters in runtime.
+Sometymes you need types and assertions when organizing bigger application. Addon provides extensions to assert types for computed properties and function parameters in runtime.
                  
 ```                 
                  _                    _                         
