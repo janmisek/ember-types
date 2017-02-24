@@ -44,7 +44,11 @@
   "keywords": [
     "ember-addon",
     "type",
-    "assert"
+    "types",
+    "assert",
+    "assertion",
+    "computed",
+    "property"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.7"
