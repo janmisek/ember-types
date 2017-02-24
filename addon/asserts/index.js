@@ -1,7 +1,2 @@
-import { assertType } from './assert';
-import {defineValidator} from './definition';
-
-export {
-  assertType,
-  defineValidator
-}
+export { assertType, assertArgs } from './assert';
+export { defineValidator } from './definition';

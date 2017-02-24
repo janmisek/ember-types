@@ -49,5 +49,13 @@ export const assertType = (value, validator, options) => {
 
   return true;
 
+};
 
+export const assertArgs = (args, validators) => {
+  for (let i=0; i<args.length-1; args++) {
+    const validator = validators[i];
+    if (validator) {
+      assertType(args[i], validator);
+    }
+  }
 };
