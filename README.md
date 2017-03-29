@@ -22,12 +22,29 @@ Sometymes you need types and assertions when organizing bigger application. Addo
 import { assertableComputed } from 'ember-types/property';
 
 export default Ember.Object.extend({
+  
   hello: assertableComputed(function() {
       return 'world'
-  }).assertable('string')
+  }).asserted('string')
+
 });
 
-``` 
+```
+
+or without default 
+
+``` javascript
+import { assertableComputed } from 'ember-types/property';
+
+export default Ember.Object.extend({
+ 
+ helloWorld: assertableComputed().asserted('string')
+
+});
+
+```
+
+ 
 ## Assert type of function arguments
 
 ``` javascript

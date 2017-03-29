@@ -5,6 +5,10 @@ import {PropertyAssertionError} from './errors';
 import extractName from './../classes/extract-name';
 
 export default  (func) => {
+  if (!func) {
+    func = () => null;
+  }
+
   const cp = Ember.computed(func);
 
   cp.asserted = (validator) => {
