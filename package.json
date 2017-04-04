@@ -1,6 +1,6 @@
 {
   "name": "ember-types",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Sometymes you need types and assertions when organizing bigger application. Addon provides extensions to assert types for computed properties and function parameters in runtime.",
   "directories": {
     "doc": "doc",
