@@ -50,7 +50,7 @@
     "property"
   ],
   "dependencies": {
-    "ember-exex": "^0.1.11",
+    "ember-exex": "^0.1.13",
     "ember-cli-babel": "^5.1.7"
   },
   "ember-addon": {
