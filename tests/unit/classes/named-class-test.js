@@ -9,8 +9,7 @@ module('classes | named-class', {
 
 test('named class and extract name / classes / instances', function (assert) {
 
-  const Klazz = Ember.Object.extend();
-  namedClass(Klazz, 'This.Is.My.Klazz');
+  const Klazz = namedClass('This.Is.My.Klazz', Ember.Object.extend());
   assert.equal(extractName(Klazz), "Class This.Is.My.Klazz");
 
   const instance = Klazz.create();

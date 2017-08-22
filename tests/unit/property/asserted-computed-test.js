@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import {module, test} from 'ember-qunit';
 import {PropertyAssertionError} from 'ember-types/property/errors'
-import asserted from 'ember-types/property/assertable-computed'
+import {asserted} from 'ember-types/property'
 const {computed} = Ember;
 
 module('property | asserted-computed', {
