@@ -1,7 +1,5 @@
-import assertableComputed from './assertable-computed';
-import willBe from './will-be';
+import asserted from './asserted-computed';
 
 export {
-  assertableComputed,
-  willBe
+  asserted,
 };

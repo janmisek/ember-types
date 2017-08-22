@@ -51,11 +51,11 @@ export default Ember.Object.extend({
 or empty 
 
 ``` javascript
-import { assertableComputed } from 'ember-types/property';
+import { asserted } from 'ember-types/property';
 
 export default Ember.Object.extend({
  
- helloWorld: assertable('string')
+ helloWorld: asserted('string')
 
 });
 
