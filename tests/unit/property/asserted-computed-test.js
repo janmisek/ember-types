@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import {module, test} from 'ember-qunit';
 import {PropertyAssertionError} from 'ember-types/property/errors'
-import computed from 'ember-types/property/assertable-computed'
+import asserted from 'ember-types/property/assertable-computed'
+const {computed} = Ember;
 
 module('property | asserted-computed', {
   // Specify the other units that are required for this test.
@@ -13,13 +14,22 @@ test('Assert throws on computed properties', function (assert) {
 
   instance = Ember.Object
     .extend({
-      prop: computed(function () {
+
+      prop1: asserted('string', computed(function () {
         return 1;
-      }).asserted('string')
+      })),
+
+      prop2: asserted('string', function () {
+        return 1;
+      })
+
     }).create();
 
-  assert.throws(() => instance.get('prop'), PropertyAssertionError);
-  assert.throws(() => instance.set('prop', 1), PropertyAssertionError);
+  assert.throws(() => instance.get('prop1'), PropertyAssertionError);
+  assert.throws(() => instance.set('prop1', 1), PropertyAssertionError);
+
+  assert.throws(() => instance.get('prop2'), PropertyAssertionError);
+  assert.throws(() => instance.set('prop2', 1), PropertyAssertionError);
 
 });
 
@@ -28,9 +38,9 @@ test('Assert does not throw computed properties', function (assert) {
 
   instance = Ember.Object
     .extend({
-      prop: computed(function () {
+      prop: asserted('number', computed(function () {
         return 1;
-      }).asserted('number')
+      }))
     }).create();
 
   instance.get('prop');
@@ -40,18 +50,15 @@ test('Assert does not throw computed properties', function (assert) {
 
 });
 
-test('Non asserted property works', function (assert) {
+test('Assert works for empty properties', function (assert) {
   let instance;
 
   instance = Ember.Object
     .extend({
-      prop: computed(function () {
-        return 1;
-      })
+      prop: asserted('number')
     }).create();
 
-  instance.get('prop');
-  instance.set('prop', 1);
+  assert.throws(() => instance.set('prop', 'hello'), PropertyAssertionError);
 
   assert.ok(true);
 

@@ -19,26 +19,43 @@ Sometymes you need types and assertions when organizing bigger application. Addo
 ## Typed computed property
 
 ``` javascript
-import { assertableComputed } from 'ember-types/property';
+import { asserted } from 'ember-types/property';
 
 export default Ember.Object.extend({
   
-  hello: assertableComputed(function() {
+  hello: asserted('string', function() {
       return 'world'
-  }).asserted('string')
+  })
 
 });
 
 ```
 
-or without default 
+or with passing computed
+
+``` javascript
+import { asserted } from 'ember-types/property';
+const {computed} = Ember;
+
+export default Ember.Object.extend({
+  
+  hello: asserted('string', computed(function() {
+      return 'world'
+  }))
+
+});
+
+```
+
+
+or empty 
 
 ``` javascript
 import { assertableComputed } from 'ember-types/property';
 
 export default Ember.Object.extend({
  
- helloWorld: assertableComputed().asserted('string')
+ helloWorld: assertable('string')
 
 });
 

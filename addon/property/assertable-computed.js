@@ -3,18 +3,22 @@ import {assertType} from './../asserts';
 import {AssertTypeError} from './../asserts/errors';
 import {PropertyAssertionError} from './errors';
 import extractName from './../classes/extract-name';
+const {ComputedProperty, computed} = Ember;
 
-export default  (func) => {
-  if (!func) {
-    func = () => null;
+export default  (validator, definition) => {
+  let cp;
+
+  if (!definition) {
+    definition = () => undefined;
   }
 
-  const cp = Ember.computed(func);
+  if (definition instanceof ComputedProperty) {
+    cp = definition;
+  } else {
+    cp = computed(definition);
+  }
 
-  cp.asserted = (validator) => {
-    cp._validator = validator;
-    return cp;
-  };
+  cp._validator = validator;
 
   const superGetter = cp.get;
   cp.get = function (obj, key) {
