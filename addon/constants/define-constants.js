@@ -1,4 +1,6 @@
-export default function defineConstants(constant = {}) {
+export default function defineConstants(...constants) {
+
+  const constant = Object.assign({}, ...constants);
 
   const _inverted = {};
 
