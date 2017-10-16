@@ -26,9 +26,7 @@ export const assertType = (value, validator, options) => {
     }
 
     // normalize options object
-    options = {
-      exception: options.exception !== undefined ? options.exception : true
-    };
+    options.exception = options.exception !== undefined ? options.exception : true;
 
     validator = resolveValidator(validator);
     validator.validate(value);
