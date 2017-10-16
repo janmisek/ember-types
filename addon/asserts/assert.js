@@ -16,13 +16,13 @@ export const assertType = (value, validator, options) => {
 
   try {
 
-    options = options || {};
-
     // options could be string to simplify usage
     if (typeof options === 'string') {
       options = {
         msg: options
       };
+    } else {
+      options = options || {};
     }
 
     // normalize options object
