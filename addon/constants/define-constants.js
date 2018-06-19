@@ -48,6 +48,9 @@ export default function defineConstants(...constants) {
   };
 
   Object.freeze(constant);
-
+  Object.freeze(_inverted);
+  Object.freeze(_values);
+  Object.freeze(_names);
+  
   return constant;
 }
