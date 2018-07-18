@@ -1,17 +1,15 @@
 export default function defineConstants(...constants) {
 
-  const constant = Object.assign({}, ...constants);
+  constants = Object.assign({}, ...constants);
 
   const _inverted = {};
-
   const _values = [];
-
   const _names = [];
 
-  for (let k in constant) {
-    if (constant.hasOwnProperty(k)) {
+  for (let k in constants) {
+    if (constants.hasOwnProperty(k)) {
 
-      const v = constant[k];
+      const v = constants[k];
 
       // prepare inverted
       _inverted[v] = k;
@@ -24,33 +22,38 @@ export default function defineConstants(...constants) {
     }
   }
 
-  constant.getName = function (v) {
+  function Constants () {
+    Object.assign(this, constants);
+  }
+
+  Constants.prototype.getName = function (v) {
     return _inverted[v];
   };
 
-  constant.getNames = function () {
+  Constants.prototype.getNames = function () {
     return _names;
   };
 
-  constant.hasValue = function (value) {
+  Constants.prototype.hasValue = function (value) {
     return _values.indexOf(value) !== -1;
   };
 
-  constant.getValues = function () {
+  Constants.prototype.getValues = function () {
     return _values;
-
   };
 
-  constant.getHash = function () {
+  Constants.prototype.getHash = function () {
     const hash = {};
     _names.forEach((n, i) => hash[n] = _values[i]);
     return hash;
   };
 
-  Object.freeze(constant);
+  const instance = new Constants(constants)
+
+  Object.freeze(instance);
   Object.freeze(_inverted);
   Object.freeze(_values);
   Object.freeze(_names);
-  
-  return constant;
+
+  return instance;
 }
